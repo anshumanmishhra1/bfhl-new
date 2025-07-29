@@ -1,11 +1,21 @@
 const express = require("express");
 const app = express();
+const dotenv = require("dotenv");
 const userRoutes = require("./routes/userRoutes");
+const cors = require("cors");
 
-app.use(express.json());
-app.use("/", userRoutes);
+dotenv.config();
 
-const PORT = 3000;
+app.use(cors());
+app.use(express.json()); // for parsing JSON requests
+
+app.use("/bfhl", userRoutes); // This registers your route
+
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

@@ -1,24 +1,27 @@
-exports.processData = (req, res) => {
+exports.getData = (req, res) => {
+  res.status(200).json({ operation_code: "1234" });
+};
+
+exports.postData = (req, res) => {
   const { data } = req.body;
 
-  if (!data || !Array.isArray(data)) {
-    return res.status(400).json({ status: false, message: "Invalid input" });
-  }
+  const isAlphabet = (str) => /^[A-Za-z]+$/.test(str);
+  const isNumber = (str) => /^\d+$/.test(str);
 
-  const isAlphabet = (char) => /^[a-zA-Z]$/.test(char);
-  const isNumber = (char) => /^[0-9]$/.test(char);
-
+  const alphabets = data.filter(isAlphabet);
   const numbers = data.filter(isNumber);
-  const alphabets = data.filter(isAlphabet).map(ch => ch.toUpperCase());
-  const highestAlphabet = alphabets.sort().reverse()[0] || null;
+
+  const highestAlphabet = alphabets.length
+    ? [alphabets.reduce((a, b) => (a > b ? a : b))]
+    : [];
 
   res.status(200).json({
-    status: true,
-    user_id: "your_unique_user_id", // Change this to your actual user_id
-    email: "your_email@example.com",
-    roll_number: "your_roll_number",
+    is_success: true,
+    user_id: "anshuman_be22", // replace with actual id
+    email: "anshuman1312.be22@chitkara.edu.in",
+    roll_number: "2110991312",
     numbers,
     alphabets,
-    highest_alphabet: highestAlphabet
+    highest_alphabet: highestAlphabet,
   });
 };
