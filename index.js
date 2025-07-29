@@ -7,9 +7,9 @@ const cors = require("cors");
 dotenv.config();
 
 app.use(cors());
-app.use(express.json()); // for parsing JSON requests
+app.use(express.json()); 
 
-app.use("/bfhl", userRoutes); // This registers your route
+app.use("/bfhl", userRoutes); 
 
 app.get("/", (req, res) => {
   res.send("API is running...");

@@ -17,7 +17,7 @@ exports.postData = (req, res) => {
 
   res.status(200).json({
     is_success: true,
-    user_id: "anshuman_be22", // replace with actual id
+    user_id: "anshuman_be22", 
     email: "anshuman1312.be22@chitkara.edu.in",
     roll_number: "2110991312",
     numbers,
